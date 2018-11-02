@@ -86,7 +86,7 @@ def get_json(url, data):
     if callback=='':
         callback = "jsonp%s" % int(time.time()*1000)
     else:
-        callback = "jsonp%s" % int(callback.replace('jsonp'))+1
+        callback = "jsonp%s" % (int(callback.replace('jsonp',''))+1)
     data["callback"] = callback
 
     response = requests.get(url, data)
