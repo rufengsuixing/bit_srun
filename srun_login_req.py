@@ -78,11 +78,15 @@ def xencode(msg: str, key):
     # print(v)
     return l(v, False)
 
-
+callback=''
 def get_json(url, data):
     '''Http GET, return json
     '''
-    callback = "jsonp%s" % int(time.time()*1000)
+    global callback
+    if callback=='':
+        callback = "jsonp%s" % int(time.time()*1000)
+    else:
+        callback = "jsonp%s" % int(callback.replace('jsonp'))+1
     data["callback"] = callback
 
     response = requests.get(url, data)
